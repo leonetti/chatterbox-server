@@ -16,7 +16,7 @@ var responses = {results: []};
 var defaultCorsHeaders = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "access-control-allow-headers": "content-type, accept",
+  "access-control-allow-headers": "content-type, accept, X-Parse-Application-Id, X-Parse-REST-API-Key",
   "access-control-max-age": 10 // Seconds.
 };
 
@@ -78,13 +78,20 @@ var requestHandler = function(request, response) {
   } else if(request.method === 'GET') {
     statusCode = 200;
     response.writeHead(statusCode, headers);
+    console.log(responses);
     response.end(JSON.stringify(responses));
   } else if(request.method === 'OPTIONS'){
     statusCode = 200;
     response.writeHead(statusCode, headers);
       if(request.url === '/'){
+        response.writeHead(statusCode, headers);
+        response.end(JSON.stringify(responses));
+      } else if (request.url === '/classes/messages') {
+        response.writeHead(statusCode, headers);
+        response.end(JSON.stringify(responses));
+      } else {
+        response.end(JSON.stringify(responses));
       }
-      response.end(JSON.stringify(responses));
   }
 
   console.log("Serving request type " + request.method + " for url " + request.url);
