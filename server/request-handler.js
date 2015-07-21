@@ -22,6 +22,19 @@ var defaultCorsHeaders = {
 
 
 var requestHandler = function(request, response) {
+
+  app.get('/classes/messages', function(){
+    response.send('Hello World!');
+  });
+  app.post('/', function(){
+    response.send('Got a POST request');
+  });
+  app.options('/', function(){
+    response.send('meh');
+  });
+
+
+
   // Request and Response come from node's http module.
   //
   // They include information about both the incoming request, such as
@@ -37,18 +50,18 @@ var requestHandler = function(request, response) {
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
 
-  // var resultsObj = {};
-  // resultsObj.results = [];
-  // resultsObj.results.push(request);
+  var resultsObj = {};
+  resultsObj.results = [];
+  resultsObj.results.push(request);
 
   
 
 
-  // if(request.method === 'POST') {
-  //   if(request._postData) {
-  //     responses.results.push(request._postData);
-  //   }
-  // }
+  if(request.method === 'POST') {
+    if(request._postData) {
+      responses.results.push(request._postData);
+    }
+  }
   var statusCode;
 
   var headers = defaultCorsHeaders;
