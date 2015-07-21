@@ -120,6 +120,7 @@ $(function() {
 
       if (results) {
         var rooms = {};
+        rooms[app.roomname] = true;
         results.forEach(function(data) {
           var roomname = data.roomname;
           if (roomname && !rooms[roomname]) {
