@@ -54,6 +54,17 @@ var requestHandler = function(request, response) {
           responses.results.push(parsedData);
           response.end(JSON.stringify(responses));
         });
+      } else if (request.url === '/classes/room') {
+        statusCode = 201;
+        var data = '';
+        request.on('data', function(chunk){
+          data += chunk;
+        });
+        request.on('end', function(){
+          var parsedData = JSON.parse(data);
+          responses.results.push(parsedData);
+          response.end(JSON.stringify(responses));
+        });
       }
     } else if(request.method === 'GET') {
       statusCode = 200;
